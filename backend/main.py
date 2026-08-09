@@ -8,8 +8,8 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
-from backend.database import get_db_connection
-from backend.auth import (
+from database import get_db_connection
+from auth import (
     hash_password,
     verify_password,
     create_access_token,
