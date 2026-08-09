@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASSIFIED: Personal Job Dossier</title>
+    <link rel="stylesheet" href="/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="dossier-body">
+    <header class="dossier-header">
+        <div class="header-logo">
+            <span class="confidential-stamp">RESTRICTED</span>
+            <div class="logo-text">
+                <h1>JOB DOSSIER TRACKER</h1>
+                <p>STATUS SUB-REGISTRY // DEPARTMENT OF CAREERS</p>
+            </div>
+        </div>
+        <div class="user-control">
+            <span id="user-display" class="user-tag">AGENT: loading...</span>
+            <button id="logout-btn" class="logout-btn">SECURE LOGOUT</button>
+        </div>
+    </header>
+
+    <main class="dossier-main-container">
+        <!-- TOP ROW: Stats Counters -->
+        <section class="stats-board">
+            <div class="stat-card" data-status="wishlist">
+                <span class="stat-count" id="stat-wishlist">0</span>
+                <span class="stat-label">WISHLIST</span>
+            </div>
+            <div class="stat-card" data-status="applied">
+                <span class="stat-count" id="stat-applied">0</span>
+                <span class="stat-label">APPLIED</span>
+            </div>
+            <div class="stat-card" data-status="interview">
+                <span class="stat-count" id="stat-interview">0</span>
+                <span class="stat-label">INTERVIEWS</span>
+            </div>
+            <div class="stat-card" data-status="offer">
+                <span class="stat-count" id="stat-offer">0</span>
+                <span class="stat-label">OFFERS</span>
+            </div>
+            <div class="stat-card" data-status="rejected">
+                <span class="stat-count" id="stat-rejected">0</span>
+                <span class="stat-label">REJECTS</span>
+            </div>
+        </section>
+
+        <div class="grid-content">
+            <!-- LEFT PANEL: Add/Edit Form -->
+            <section class="left-panel">
+                <div class="dossier-card form-card">
+                    <div class="folder-tab card-tab" id="form-tab-title">ADD NEW CASE</div>
+                    <h2 class="card-title" id="form-header">NEW CASE FILE</h2>
+                    <form id="application-form" class="dossier-form">
+                        <input type="hidden" id="app-id">
+                        
+                        <div class="form-group">
+                            <label for="company" class="form-label">COMPANY NAME*:</label>
+                            <input type="text" id="company" required placeholder="e.g. Acme Corp" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="role" class="form-label">JOB ROLE / TITLE:</label>
+                            <input type="text" id="role" placeholder="e.g. Data Analyst" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="status" class="form-label">STATUS LEVEL:</label>
+                            <select id="status" class="form-select">
+                                <option value="wishlist">WISHLIST</option>
+                                <option value="applied">APPLIED</option>
+                                <option value="interview">INTERVIEW</option>
+                                <option value="offer">OFFER</option>
+                                <option value="rejected">REJECTED</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_applied" class="form-label">DATE OF ACTION:</label>
+                            <input type="date" id="date_applied" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="link" class="form-label">REFERENCE LINK:</label>
+                            <input type="url" id="link" placeholder="https://..." class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="notes" class="form-label">DOSSIER NOTES / FINDINGS:</label>
+                            <textarea id="notes" placeholder="Enter case remarks..." class="form-textarea"></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" id="submit-btn" class="stamp-btn">SUBMIT RECORD</button>
+                            <button type="button" id="cancel-edit-btn" class="cancel-btn hidden">ABORT EDIT</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL: Filters and Cases List -->
+            <section class="right-panel">
+                <div class="controls-bar">
+                    <!-- Search Bar -->
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="SEARCH COMPANY OR ROLE..." class="search-input">
+                    </div>
+                    
+                    <!-- Filter Chips -->
+                    <div class="filter-chips">
+                        <button class="chip active" data-filter="all">ALL CASES</button>
+                        <button class="chip" data-filter="wishlist">WISHLIST</button>
+                        <button class="chip" data-filter="applied">APPLIED</button>
+                        <button class="chip" data-filter="interview">INTERVIEW</button>
+                        <button class="chip" data-filter="offer">OFFER</button>
+                        <button class="chip" data-filter="rejected">REJECTED</button>
+                    </div>
+                </div>
+
+                <div id="cases-container" class="cases-list">
+                    <!-- Cases will be dynamically injected here -->
+                    <div class="dossier-card empty-card">
+                        <p>NO FILES MATCHING CRITERIA FOUND IN DOSSIER.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Global Javascript -->
+    <script src="/app.js"></script>
+</body>
+</html>

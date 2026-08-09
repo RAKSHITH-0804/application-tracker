@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASSIFIED: Job Tracker Login</title>
+    <link rel="stylesheet" href="/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="dossier-body">
+    <div class="folder-container">
+        <div class="folder-tab">DEPT_OF_CAREERS // LOG_01</div>
+        <div class="dossier-card">
+            <h1 class="dossier-title">EMPLOYEE LOGIN</h1>
+            <p class="subtitle">ENTER CREDENTIALS TO ACCESS DOSSIER RECORDS</p>
+            
+            <div id="error-message" class="alert-box error hidden"></div>
+            
+            <form id="login-form" class="dossier-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">EMAIL ADDRESS:</label>
+                    <input type="email" id="email" required placeholder="name@domain.com" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">SECRET KEY / PASSWORD:</label>
+                    <input type="password" id="password" required placeholder="••••••••" class="form-input">
+                </div>
+                
+                <button type="submit" class="stamp-btn">AUTHENTICATE &gt;&gt;</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>NEW EMPLOYEE? <a href="/signup" class="dossier-link">CREATE ACCOUNT &gt;&gt;</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorBox = document.getElementById('error-message');
+            
+            errorBox.classList.add('hidden');
+            errorBox.innerText = '';
+            
+            try {
+                const response = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    window.location.href = '/';
+                } else {
+                    errorBox.innerText = data.detail || 'Authentication failed.';
+                    errorBox.classList.remove('hidden');
+                }
+            } catch (err) {
+                errorBox.innerText = 'Network error or server unavailable.';
+                errorBox.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
